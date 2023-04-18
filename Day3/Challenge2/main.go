@@ -19,8 +19,8 @@ func main() {
 func calcOutcome(input []string) int {
 	returnVal := 0
 
-	for _, i := range input {
-		common := getCommonItem(i)
+	for i := 0; i < len(input); i = i + 3 {
+		common := getCommonItem(input[i : i+3])
 		val := findValue(common)
 		returnVal = returnVal + val
 	}
@@ -28,13 +28,16 @@ func calcOutcome(input []string) int {
 	return returnVal
 }
 
-func getCommonItem(input string) string {
+func getCommonItem(input []string) string {
 	var returnval string
-	length := len(input) / 2
-	for i := 0; i < length; i++ {
-		for j := 0; j < length; j++ {
-			if input[i] == input[j+length] {
-				returnval = string(input[i])
+	for i := 0; i < len(input[0]); i++ {
+		for j := 0; j < len(input[1]); j++ {
+			if input[0][i] == input[1][j] {
+				for k := 0; k < len(input[2]); k++ {
+					if input[0][i] == input[2][k] {
+						return string(input[0][i])
+					}
+				}
 			}
 		}
 	}
